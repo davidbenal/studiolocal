@@ -368,7 +368,8 @@ def workflow_save(name: str, from_yaml: str, description: str) -> None:
     target = store.root / "workflows" / f"{slug}.yaml"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(src.read_text())
-    sid = (tracker.find_active_session() or {}).get("id") if tracker.find_active_session() else None
+    active = tracker.find_active_session()
+    sid = active["id"] if active else None
     wid = tracker.create_workflow(
         slug=slug,
         name=name,
