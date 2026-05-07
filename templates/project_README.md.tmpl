@@ -1,0 +1,23 @@
+# {{ name }}
+
+- **Slug:** `{{ slug }}`
+- **Status:** {{ status }}
+- **Tags:** {{ tags }}
+- **Budget:** {{ budget }}
+- **Criado em:** {{ created_at }}
+
+## Pastas
+
+- `drafts/` — gerações recentes (status=draft)
+- `library/` — assets aprovados (status=library)
+- `_tmp/` — descartes e arquivos intermediários
+- `BRIEF.md` — documento de intenção (opcional)
+
+## Comandos úteis
+
+```
+/studio-status                              # estado atual
+/studio-image "prompt..."                   # gera imagem
+/studio-promote 03                          # draft 03 → library
+/studio-report --project {{ slug }}         # custos do project
+```

@@ -1,0 +1,31 @@
+schema: studiolocal/workflow/v1
+slug: {{ slug }}
+name: {{ name }}
+description: {{ description }}
+created_from_session: {{ source_session_id }}
+
+# Inputs parametrizáveis. Referencie via {{ inputs.X }} dentro de steps.
+inputs:
+  prompt:
+    type: string
+    required: true
+    description: Prompt base
+  reference_image:
+    type: file
+    required: false
+
+steps:
+  # Cada step é executado em sequência. kind ∈ {image, video, upscale, human_pick}.
+  # Outputs ficam disponíveis como {{ steps.<id>.<output_key> }}.
+  - id: example
+    kind: image
+    model: nano-banana-pro
+    params:
+      prompt: "{{ inputs.prompt }}"
+      num_outputs: 1
+    outputs:
+      assets: example.assets
+
+# Move automaticamente para library/ ao final da Run.
+finalize:
+  promote_to_library: []

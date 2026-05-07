@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Env / secrets
+.env
+.env.*
+!.env.tmpl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local data (never commit user assets/db)
+.studiolocal/
+
+# IDE
+.vscode/
+.idea/
+*.swp

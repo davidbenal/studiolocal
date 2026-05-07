@@ -1,0 +1,76 @@
+# models.yaml — catálogo de modelos suportados pelo StudioLocal
+#
+# Custos em BRL são placeholders calibráveis (estimados sobre Fal.ai pricing × USD-BRL).
+# Atualizar manualmente via PR; doctor.sh avisa se este arquivo tiver >30 dias.
+
+schema: studiolocal/models/v1
+calibrated_at: 2026-05-07
+usd_brl_assumed: 5.10
+
+models:
+  nano-banana-2:
+    kind: image
+    fal_endpoint: "fal-ai/gemini-flash-image"
+    display_name: "Nano Banana 2 (Gemini 2.5 Flash Image)"
+    cost_brl_per_call: 0.08
+    params:
+      prompt: { type: string, required: true }
+      num_outputs: { type: int, default: 1, min: 1, max: 4 }
+      aspect_ratio: { type: enum, values: ["1:1", "3:4", "4:3", "16:9", "9:16"], default: "1:1" }
+      reference: { type: file, required: false }
+    notes: "Rápido, barato. Ideal para exploração e mood."
+
+  nano-banana-pro:
+    kind: image
+    fal_endpoint: "fal-ai/gemini-flash-image-pro"
+    display_name: "Nano Banana Pro"
+    cost_brl_per_call: 0.32
+    params:
+      prompt: { type: string, required: true }
+      num_outputs: { type: int, default: 1, min: 1, max: 4 }
+      aspect_ratio: { type: enum, values: ["1:1", "3:4", "4:3", "16:9", "9:16"], default: "1:1" }
+      reference: { type: file, required: false }
+      style_strength: { type: float, default: 0.7, min: 0, max: 1 }
+    notes: "Hero shots, editorial, fidelidade alta."
+
+  kling-3:
+    kind: video
+    fal_endpoint: "fal-ai/kling-video/v3/pro/text-to-video"
+    display_name: "Kling 3"
+    cost_brl_per_call: 2.40
+    params:
+      prompt: { type: string, required: true }
+      input_image: { type: asset_ref, required: false }
+      duration_s: { type: enum, values: [5, 10], default: 5 }
+      aspect_ratio: { type: enum, values: ["16:9", "9:16", "1:1"], default: "16:9" }
+    notes: "Vídeo prêmio. Caro."
+
+  seedance-2:
+    kind: video
+    fal_endpoint: "fal-ai/seedance/v2"
+    display_name: "Seedance 2"
+    cost_brl_per_call: 1.80
+    params:
+      prompt: { type: string, required: true }
+      input_image: { type: asset_ref, required: false }
+      duration_s: { type: int, default: 5, min: 3, max: 10 }
+    notes: "Equilíbrio custo/qualidade. Default para image-to-video."
+
+  clarity:
+    kind: upscale
+    fal_endpoint: "fal-ai/clarity-upscaler"
+    display_name: "Clarity Upscaler"
+    cost_brl_per_call: 0.15
+    params:
+      input_asset: { type: asset_ref, required: true }
+      scale: { type: enum, values: [2, 4], default: 2 }
+    notes: "Upscale photoreal. Não inventa detalhes."
+
+defaults:
+  image: nano-banana-pro
+  video: seedance-2
+  upscale: clarity
+
+budget_alerts:
+  warn_at_pct: 80
+  block_at_pct: 100
