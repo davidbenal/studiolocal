@@ -10,7 +10,7 @@ usd_brl_assumed: 5.10
 models:
   nano-banana-2:
     kind: image
-    fal_endpoint: "fal-ai/gemini-flash-image"
+    fal_endpoint: "fal-ai/gemini-25-flash-image"
     display_name: "Nano Banana 2 (Gemini 2.5 Flash Image)"
     cost_brl_per_call: 0.08
     params:
@@ -22,8 +22,8 @@ models:
 
   nano-banana-pro:
     kind: image
-    fal_endpoint: "fal-ai/gemini-flash-image-pro"
-    display_name: "Nano Banana Pro"
+    fal_endpoint: "fal-ai/gemini-3-pro-image-preview"
+    display_name: "Nano Banana Pro (Gemini 3 Pro Image)"
     cost_brl_per_call: 0.32
     params:
       prompt: { type: string, required: true }

@@ -19,7 +19,7 @@ echo ""
 
 echo "→ CLI"
 if command -v studiolocal >/dev/null 2>&1; then
-    ok "studiolocal $(studiolocal --version 2>&1 | tr -d 'studiolocal, ')"
+    ok "$(studiolocal --version 2>&1)"
 else
     fail "CLI 'studiolocal' não no PATH"
 fi
